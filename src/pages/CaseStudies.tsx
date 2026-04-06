@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVATECH SYSTEMS — CASE STUDIES PAGE
+   Maskitech SYSTEMS — CASE STUDIES PAGE
    Design: Dark Modernism — carousel with expandable modals
    ============================================================ */
 
@@ -11,7 +11,7 @@ import {
   BarChart3, Users, Clock, Globe
 } from "lucide-react";
 
-const CASE_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/novatech-case-study-bg-3JYmyDTwn82UP6wEJXn9Tn.webp";
+const CASE_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/Maskitech-case-study-bg-3JYmyDTwn82UP6wEJXn9Tn.webp";
 
 const caseStudies = [
   {
@@ -21,14 +21,14 @@ const caseStudies = [
     icon: DollarSign,
     color: "oklch(0.52 0.22 258)",
     challenge: "Meridian needed to modernize its 30-year-old core banking infrastructure while maintaining 24/7 operations for 12 million customers across 40 countries.",
-    solution: "Deployed NovaTech Apex Platform with a phased migration strategy, zero-downtime cutover, and Shield Security for regulatory compliance across 40+ jurisdictions.",
+    solution: "Deployed Maskitech Apex Platform with a phased migration strategy, zero-downtime cutover, and Shield Security for regulatory compliance across 40+ jurisdictions.",
     results: [
       { metric: "340%", label: "ROI in 18 months" },
       { metric: "60%", label: "Reduction in IT costs" },
       { metric: "99.99%", label: "Uptime maintained" },
       { metric: "3x", label: "Faster transaction processing" },
     ],
-    quote: "NovaTech transformed our infrastructure without a single hour of downtime. The ROI exceeded every projection we had.",
+    quote: "Maskitech transformed our infrastructure without a single hour of downtime. The ROI exceeded every projection we had.",
     author: "Sarah Chen",
     role: "CTO, Meridian Global Bank",
     tags: ["Digital Transformation", "Core Banking", "Compliance"],
@@ -112,7 +112,7 @@ const caseStudies = [
       { metric: "94%", label: "Passenger satisfaction" },
       { metric: "$85M", label: "Operational savings" },
     ],
-    quote: "NovaTech's predictive analytics have transformed our operations. We now anticipate disruptions before they happen.",
+    quote: "Maskitech's predictive analytics have transformed our operations. We now anticipate disruptions before they happen.",
     author: "Captain David Osei",
     role: "COO, Atlas Airlines",
     tags: ["Aviation Operations", "Predictive Analytics", "Compliance"],
@@ -145,14 +145,14 @@ export default function CaseStudies() {
         <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.52_0.22_258)]/5 to-transparent pointer-events-none" />
         <div className="container relative z-10">
           <div className="max-w-2xl">
-            <span className="novatech-badge mb-4 inline-block">Case Studies</span>
+            <span className="Maskitech-badge mb-4 inline-block">Case Studies</span>
             <h1 className="text-5xl font-bold text-foreground mb-4 leading-tight">
               Real Results.
               <br />
               <span className="text-gradient-cobalt">Proven Impact.</span>
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Explore how leading enterprises across industries have transformed their operations with NovaTech Systems.
+              Explore how leading enterprises across industries have transformed their operations with Maskitech Systems.
             </p>
           </div>
         </div>
@@ -205,7 +205,7 @@ export default function CaseStudies() {
                         </div>
                         <div>
                           <h2 className="text-xl font-bold text-foreground">{activeCase.company}</h2>
-                          <span className="novatech-badge text-[10px]">{activeCase.industry}</span>
+                          <span className="Maskitech-badge text-[10px]">{activeCase.industry}</span>
                         </div>
                       </div>
                     </div>
@@ -222,7 +222,7 @@ export default function CaseStudies() {
 
                     <div className="flex flex-wrap gap-2">
                       {activeCase.tags.map(tag => (
-                        <span key={tag} className="novatech-badge text-[10px]">{tag}</span>
+                        <span key={tag} className="Maskitech-badge text-[10px]">{tag}</span>
                       ))}
                     </div>
 
@@ -415,7 +415,7 @@ export default function CaseStudies() {
                         </div>
                         <div>
                           <h2 className="text-2xl font-bold text-white">{selectedCase.company}</h2>
-                          <span className="novatech-badge">{selectedCase.industry}</span>
+                          <span className="Maskitech-badge">{selectedCase.industry}</span>
                         </div>
                       </div>
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
@@ -469,7 +469,7 @@ export default function CaseStudies() {
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {selectedCase.tags.map(tag => (
-                        <span key={tag} className="novatech-badge">{tag}</span>
+                        <span key={tag} className="Maskitech-badge">{tag}</span>
                       ))}
                     </div>
                     <div className="flex gap-3 pt-2">

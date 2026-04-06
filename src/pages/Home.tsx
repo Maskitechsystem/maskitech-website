@@ -11,7 +11,7 @@ import {
   Globe, Lock, Zap, TrendingUp, CheckCircle2, Star
 } from "lucide-react";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/novatech-hero-bg-PmR75BL2kd7qegqUDASAdk.webp";
+const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/Maskitech-hero-bg-PmR75BL2kd7qegqUDASAdk.webp";
 
 function useCountUp(target: number, duration: number = 2000, start: boolean = false) {
   const [count, setCount] = useState(0);
@@ -99,17 +99,33 @@ const products = [
 ];
 
 export default function Home() {
+  useEffect(()=>{const fn=()=>{const el=document.getElementById('parallax-logo');if(el)el.style.transform=`translateY(${window.scrollY*0.8}px)`;};window.addEventListener('scroll',fn,{passive:true});return()=>window.removeEventListener('scroll',fn);},[]);
   return (
     <div className="flex flex-col">
       {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20 pb-12">
+      <section className="relative min-h-screen flex items-center justify-center pt-20 pb-12">
         {/* Background */}
         <div className="absolute inset-0 z-0">
           <img src={HERO_BG} alt="Hero background" className="w-full h-full object-cover" />
           <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
           <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.52_0.22_258)]/8 to-[oklch(0.55_0.18_200)]/4" />
         </div>
-
+{/* Logo watermark with CSS parallax */}
+<div className="absolute inset-0 z-0 flex items-center justify-end overflow-hidden pointer-events-none">
+  <img
+    src="/logo_2.png"
+    alt=""
+    id="parallax-logo"
+    className="w-auto"
+    style={{
+      height: '85%',
+      opacity: 0.5,
+      marginRight: '-5%',
+      animation: 'logoDrift 0s linear',
+      willChange: 'transform',
+    }}
+  />
+</div>
         {/* Content */}
         <div className="container relative z-10">
           <div className="max-w-3xl">
@@ -120,7 +136,7 @@ export default function Home() {
               animate="visible"
               className="mb-5"
             >
-              <span className="novatech-badge">Integrated Business Solutions</span>
+              <span className="Maskitech-badge">Integrated Business Solutions</span>
             </motion.div>
 
             <motion.h1
@@ -220,7 +236,7 @@ export default function Home() {
       <section className="py-20">
         <div className="container">
           <div className="text-center mb-16">
-            <span className="novatech-badge mb-4 inline-block">Our Product Suite</span>
+            <span className="Maskitech-badge mb-4 inline-block">Our Product Suite</span>
             <h2 className="text-4xl font-bold text-foreground mb-3 leading-tight">
               Three Powerful Products,
               <br />
@@ -334,7 +350,7 @@ export default function Home() {
       <section className="py-20">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <span className="novatech-badge mb-4 inline-block">Get Started</span>
+            <span className="Maskitech-badge mb-4 inline-block">Get Started</span>
             <h2 className="text-4xl font-bold text-foreground mb-4 leading-tight">
               Ready to Transform Your Business?
             </h2>

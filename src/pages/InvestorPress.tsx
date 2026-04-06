@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVATECH SYSTEMS — INVESTOR & PRESS CENTER PAGE
+   Maskitech SYSTEMS — INVESTOR & PRESS CENTER PAGE
    Design: Dark Modernism — financial data, press releases, downloadable reports
    ============================================================ */
 
@@ -67,7 +67,7 @@ const reports = [
   {
     id: 5,
     title: "Investor Day 2024 Presentation",
-    description: "Full slide deck from NovaTech Investor Day 2024 covering 5-year strategy, product roadmap, and financial targets.",
+    description: "Full slide deck from Maskitech Investor Day 2024 covering 5-year strategy, product roadmap, and financial targets.",
     type: "Presentation",
     date: "Oct 5, 2023",
     size: "18.4 MB",
@@ -78,7 +78,7 @@ const reports = [
   {
     id: 6,
     title: "Series D Funding Announcement Deck",
-    description: "Investor materials from NovaTech's $450M Series D funding round at a $6.2B valuation.",
+    description: "Investor materials from Maskitech's $450M Series D funding round at a $6.2B valuation.",
     type: "Funding Materials",
     date: "Sep 1, 2023",
     size: "6.7 MB",
@@ -91,39 +91,39 @@ const reports = [
 const pressReleases = [
   {
     id: 1,
-    title: "NovaTech Systems Raises $450M Series D at $6.2B Valuation",
-    excerpt: "NovaTech Systems today announced the close of a $450 million Series D funding round led by Sequoia Capital, with participation from existing investors Andreessen Horowitz and Tiger Global.",
+    title: "Maskitech Systems Raises $450M Series D at $6.2B Valuation",
+    excerpt: "Maskitech Systems today announced the close of a $450 million Series D funding round led by Sequoia Capital, with participation from existing investors Andreessen Horowitz and Tiger Global.",
     date: "Sep 1, 2023",
     category: "Funding",
     featured: true,
   },
   {
     id: 2,
-    title: "NovaTech Apex Platform Achieves FedRAMP High Authorization",
-    excerpt: "NovaTech Systems announces FedRAMP High authorization for the Apex Platform, enabling deployment across U.S. federal agencies and defense contractors.",
+    title: "Maskitech Apex Platform Achieves FedRAMP High Authorization",
+    excerpt: "Maskitech Systems announces FedRAMP High authorization for the Apex Platform, enabling deployment across U.S. federal agencies and defense contractors.",
     date: "Nov 28, 2023",
     category: "Product",
     featured: false,
   },
   {
     id: 3,
-    title: "NovaTech Acquires CloudSentry for $280M to Expand Security Portfolio",
-    excerpt: "Strategic acquisition of CloudSentry brings advanced cloud-native security capabilities and 200+ enterprise customers to the NovaTech Shield Security suite.",
+    title: "Maskitech Acquires CloudSentry for $280M to Expand Security Portfolio",
+    excerpt: "Strategic acquisition of CloudSentry brings advanced cloud-native security capabilities and 200+ enterprise customers to the Maskitech Shield Security suite.",
     date: "Jan 15, 2024",
     category: "M&A",
     featured: false,
   },
   {
     id: 4,
-    title: "NovaTech Named Leader in 2024 Gartner Magic Quadrant for Enterprise Integration",
-    excerpt: "NovaTech Systems recognized as a Leader for the third consecutive year in the Gartner Magic Quadrant for Enterprise Integration Platform as a Service.",
+    title: "Maskitech Named Leader in 2024 Gartner Magic Quadrant for Enterprise Integration",
+    excerpt: "Maskitech Systems recognized as a Leader for the third consecutive year in the Gartner Magic Quadrant for Enterprise Integration Platform as a Service.",
     date: "Feb 8, 2024",
     category: "Recognition",
     featured: false,
   },
   {
     id: 5,
-    title: "NovaTech Expands APAC Presence with New Singapore Headquarters",
+    title: "Maskitech Expands APAC Presence with New Singapore Headquarters",
     excerpt: "New regional headquarters in Singapore to serve growing demand across Southeast Asia, with $100M committed investment and plans to hire 500 employees by 2025.",
     date: "Mar 5, 2024",
     category: "Expansion",
@@ -131,8 +131,8 @@ const pressReleases = [
   },
   {
     id: 6,
-    title: "NovaTech DataFlow Analytics Achieves ISO 27001 Certification",
-    excerpt: "DataFlow Analytics platform receives ISO 27001:2022 certification, reinforcing NovaTech's commitment to enterprise-grade security and data governance.",
+    title: "Maskitech DataFlow Analytics Achieves ISO 27001 Certification",
+    excerpt: "DataFlow Analytics platform receives ISO 27001:2022 certification, reinforcing Maskitech's commitment to enterprise-grade security and data governance.",
     date: "Mar 20, 2024",
     category: "Compliance",
     featured: false,
@@ -177,14 +177,14 @@ export default function InvestorPress() {
         <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.52_0.22_258)]/5 to-transparent pointer-events-none" />
         <div className="container relative z-10">
           <div className="max-w-2xl">
-            <span className="novatech-badge mb-4 inline-block">Investor & Press</span>
+            <span className="Maskitech-badge mb-4 inline-block">Investor & Press</span>
             <h1 className="text-5xl font-bold text-foreground mb-4 leading-tight">
               Investor Relations
               <br />
               <span className="text-gradient-cobalt">& Press Center</span>
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Financial reports, press releases, and media resources for investors, analysts, and journalists covering NovaTech Systems.
+              Financial reports, press releases, and media resources for investors, analysts, and journalists covering Maskitech Systems.
             </p>
           </div>
         </div>
@@ -195,7 +195,7 @@ export default function InvestorPress() {
         <div className="container">
           <div className="flex items-center justify-between mb-8">
             <h2 className="text-sm font-mono text-muted-foreground uppercase tracking-widest">Financial Highlights — FY 2024</h2>
-            <span className="novatech-badge">As of Dec 31, 2024</span>
+            <span className="Maskitech-badge">As of Dec 31, 2024</span>
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {financialHighlights.map((item, i) => (
@@ -284,7 +284,7 @@ export default function InvestorPress() {
                     >
                       <report.icon size={18} style={{ color: report.color }} />
                     </div>
-                    <span className="novatech-badge text-[10px]">{report.type}</span>
+                    <span className="Maskitech-badge text-[10px]">{report.type}</span>
                   </div>
 
                   <div className="flex-1">
@@ -341,8 +341,8 @@ export default function InvestorPress() {
                 <p className="text-muted-foreground text-sm">For investor inquiries, financial data requests, or analyst briefings.</p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a href="mailto:ir@novatech.com" className="flex items-center gap-2 px-5 py-2.5 bg-[oklch(0.52_0.22_258)] hover:bg-[oklch(0.58_0.22_258)] text-white font-medium rounded-lg transition-all text-sm">
-                  <Mail size={15} /> ir@novatech.com
+                <a href="mailto:ir@Maskitech.com" className="flex items-center gap-2 px-5 py-2.5 bg-[oklch(0.52_0.22_258)] hover:bg-[oklch(0.58_0.22_258)] text-white font-medium rounded-lg transition-all text-sm">
+                  <Mail size={15} /> ir@Maskitech.com
                 </a>
                 <a href="tel:+18005551234" className="flex items-center gap-2 px-5 py-2.5 bg-white/5 border border-white/8 text-foreground font-medium rounded-lg hover:bg-white/8 transition-all text-sm">
                   <Phone size={15} /> +1 (800) 555-1234
@@ -362,7 +362,7 @@ export default function InvestorPress() {
               <div key={pr.id} className="glass-card rounded-2xl p-8 mb-10 border border-[oklch(0.52_0.22_258)]/20 relative overflow-hidden">
                 <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-[oklch(0.52_0.22_258)] to-[oklch(0.55_0.18_280)]" />
                 <div className="flex items-start justify-between mb-4">
-                  <span className="novatech-badge">Latest Release</span>
+                  <span className="Maskitech-badge">Latest Release</span>
                   <span className="text-xs text-muted-foreground">{pr.date}</span>
                 </div>
                 <h2 className="text-2xl font-bold text-foreground mb-3 leading-tight">{pr.title}</h2>
@@ -448,11 +448,11 @@ export default function InvestorPress() {
                 </div>
                 <h3 className="text-xl font-bold text-foreground mb-3">Press Contact</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-                  For media inquiries, interview requests, and editorial coverage of NovaTech Systems.
+                  For media inquiries, interview requests, and editorial coverage of Maskitech Systems.
                 </p>
                 <div className="space-y-3">
-                  <a href="mailto:press@novatech.com" className="flex items-center gap-2 text-sm text-[oklch(0.62_0.20_258)] hover:text-[oklch(0.72_0.18_258)] transition-colors">
-                    <Mail size={14} /> press@novatech.com
+                  <a href="mailto:press@Maskitech.com" className="flex items-center gap-2 text-sm text-[oklch(0.62_0.20_258)] hover:text-[oklch(0.72_0.18_258)] transition-colors">
+                    <Mail size={14} /> press@Maskitech.com
                   </a>
                   <a href="tel:+18005559876" className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors">
                     <Phone size={14} /> +1 (800) 555-9876

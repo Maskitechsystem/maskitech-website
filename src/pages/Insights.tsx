@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVATECH SYSTEMS — INSIGHTS / BLOG HUB PAGE
+   Maskitech SYSTEMS — INSIGHTS / BLOG HUB PAGE
    Design: Dark Modernism — multi-author blog with category filters
    ============================================================ */
 
@@ -11,7 +11,7 @@ import {
   BookOpen, TrendingUp, Shield, Cloud, Cpu, Globe
 } from "lucide-react";
 
-const BLOG_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/novatech-blog-visual-B25cuMBwvHxPbsi8PeZd7X.webp";
+const BLOG_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/Maskitech-blog-visual-B25cuMBwvHxPbsi8PeZd7X.webp";
 
 const authors = [
   {
@@ -180,14 +180,14 @@ export default function Insights() {
         <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.52_0.22_258)]/5 to-transparent pointer-events-none" />
         <div className="container relative z-10">
           <div className="max-w-2xl">
-            <span className="novatech-badge mb-4 inline-block">Insights & Thought Leadership</span>
+            <span className="Maskitech-badge mb-4 inline-block">Insights & Thought Leadership</span>
             <h1 className="text-5xl font-bold text-foreground mb-4 leading-tight">
               Enterprise Intelligence.
               <br />
               <span className="text-gradient-cobalt">Expert Perspectives.</span>
             </h1>
             <p className="text-muted-foreground text-lg leading-relaxed">
-              Deep analysis, practical guides, and strategic insights from NovaTech's technology leaders and industry experts.
+              Deep analysis, practical guides, and strategic insights from Maskitech's technology leaders and industry experts.
             </p>
           </div>
         </div>
@@ -203,7 +203,7 @@ export default function Insights() {
                 <img src={BLOG_BG} alt="Featured article" className="w-full h-full object-cover" />
                 <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
                 <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <span className="novatech-badge mb-3 inline-block">{featured.category}</span>
+                  <span className="Maskitech-badge mb-3 inline-block">{featured.category}</span>
                   <h2 className="text-2xl font-bold text-white leading-tight mb-2">{featured.title}</h2>
                   <div className="flex items-center gap-4 text-white/60 text-xs">
                     <span className="flex items-center gap-1.5"><Clock size={11} />{featured.readTime}</span>
@@ -225,7 +225,7 @@ export default function Insights() {
 
                   <div className="flex flex-wrap gap-2">
                     {featured.tags.map(tag => (
-                      <span key={tag} className="novatech-badge text-[10px]">{tag}</span>
+                      <span key={tag} className="Maskitech-badge text-[10px]">{tag}</span>
                     ))}
                   </div>
 
@@ -399,7 +399,7 @@ export default function Insights() {
       <section className="py-16 bg-[oklch(0.14_0.01_258)] border-t border-border">
         <div className="container">
           <div className="max-w-xl mx-auto text-center">
-            <span className="novatech-badge mb-4 inline-block">Newsletter</span>
+            <span className="Maskitech-badge mb-4 inline-block">Newsletter</span>
             <h2 className="text-3xl font-bold text-foreground mb-3">
               Stay Ahead of the Curve
             </h2>

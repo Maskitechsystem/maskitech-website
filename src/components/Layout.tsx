@@ -91,11 +91,37 @@ export default function Layout({ children }: LayoutProps) {
         }`}
       >
         <div className="container">
-          <div className="flex items-center justify-between h-16">
-            {/* Logo */}
-            <Link href="/" className="flex items-center gap-2.5 group">
-              <img src="https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/maskitech-logo_66194e40.png" alt="MaskiTech" className="h-8 w-auto" />
-            </Link>
+<div className="flex items-center justify-between h-20">
+  {/* Logo */}
+  <Link href="/" className="flex items-center gap-3 group">
+    <img
+      src="/logo_2.png"
+      alt="Maskitech"
+      className="h-20 w-auto"
+      style={{marginTop:'-1px', marginBottom:'-1px'}}
+    />
+    <div className="flex flex-col leading-none gap-1">
+      <span style={{
+        color:'#ffffff',
+        fontSize:'34px',
+        fontWeight:900,
+        letterSpacing:'0.05em',
+        lineHeight:1,
+        fontFamily:'Space Grotesk, sans-serif'
+      }}>
+        Maski<span style={{color:'#f97316'}}>tech</span>
+      </span>
+      <span style={{
+        color:'#60a5fa',
+        fontSize:'13px',
+        fontWeight:700,
+        letterSpacing:'0.4em',
+        textTransform:'uppercase'
+      }}>
+        Solutions
+      </span>
+    </div>
+  </Link>
 
             {/* Desktop Nav */}
             <nav className="hidden md:flex items-center gap-1">
@@ -231,10 +257,10 @@ export default function Layout({ children }: LayoutProps) {
                 <div className="max-h-80 overflow-y-auto">
                   {searchQuery.length <= 1 && (
                     <div className="px-4 py-8 text-center">
-                      <p className="text-muted-foreground text-sm">Start typing to search across all NovaTech content</p>
+                      <p className="text-muted-foreground text-sm">Start typing to search across all Maskitech content</p>
                       <div className="flex items-center justify-center gap-4 mt-4">
                         {["Products", "Case Studies", "Insights", "Press"].map((cat) => (
-                          <span key={cat} className="novatech-badge">{cat}</span>
+                          <span key={cat} className="Maskitech-badge">{cat}</span>
                         ))}
                       </div>
                     </div>
@@ -292,7 +318,7 @@ export default function Layout({ children }: LayoutProps) {
                   <span className="text-white font-bold text-sm font-mono">NT</span>
                 </div>
                 <span className="font-semibold text-foreground text-base" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  NovaTech <span className="text-[oklch(0.62_0.20_258)]">Systems</span>
+                  Maskitech <span className="text-[oklch(0.62_0.20_258)]">Systems</span>
                 </span>
               </div>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
@@ -337,7 +363,7 @@ export default function Layout({ children }: LayoutProps) {
 
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             <p className="text-xs text-muted-foreground">
-              © 2024 NovaTech Systems, Inc. All rights reserved.
+              © 2024 Maskitech Systems, Inc. All rights reserved.
             </p>
             <div className="flex items-center gap-6">
               {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (

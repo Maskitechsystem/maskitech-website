@@ -139,7 +139,7 @@ export default function Products() {
         <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.52_0.22_258)]/5 to-[oklch(0.55_0.18_200)]/3 pointer-events-none" />
         <div className="container relative z-10">
           <div className="max-w-2xl">
-            <span className="novatech-badge mb-4 inline-block">Our Product Suite</span>
+            <span className="Maskitech-badge mb-4 inline-block">Our Product Suite</span>
             <h1 className="text-5xl font-bold text-foreground mb-4 leading-tight">
               Integrated Business
               <br />
@@ -347,7 +347,7 @@ export default function Products() {
       <section className="py-16 bg-[oklch(0.14_0.01_258)] border-t border-border">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <span className="novatech-badge mb-4 inline-block">Get Started Today</span>
+            <span className="Maskitech-badge mb-4 inline-block">Get Started Today</span>
             <h2 className="text-3xl font-bold text-foreground mb-3">
               Ready to Transform Your Business?
             </h2>

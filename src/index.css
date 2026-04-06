@@ -1,5 +1,5 @@
 /* ============================================================
-   NOVATECH SYSTEMS — GLOBAL STYLES
+   Maskitech SYSTEMS — GLOBAL STYLES
    Design: Dark Modernism — Bloomberg Terminal meets Apple Pro
    Theme: Dark-first, cobalt blue accent, charcoal base, silver secondary
    Fonts: Space Grotesk (headings) + Inter (body) + JetBrains Mono (data)
@@ -50,7 +50,7 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
 
-  /* NovaTech custom colors */
+  /* Maskitech custom colors */
   --color-cobalt: var(--cobalt);
   --color-cobalt-light: var(--cobalt-light);
   --color-cobalt-dark: var(--cobalt-dark);
@@ -191,7 +191,7 @@
     }
   }
 
-  /* NovaTech custom utilities */
+  /* Maskitech custom utilities */
   .glass-card {
     background: oklch(1 0 0 / 4%);
     backdrop-filter: blur(12px);
@@ -233,7 +233,7 @@
     border-left: 3px solid oklch(0.52 0.22 258);
   }
 
-  .novatech-badge {
+  .Maskitech-badge {
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.65rem;
     letter-spacing: 0.1em;
@@ -374,4 +374,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+}
+#parallax-logo {
+  transition: transform 0.1s ease-out;
 }
