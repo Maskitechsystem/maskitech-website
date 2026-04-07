@@ -11,7 +11,7 @@ import {
   Globe, Lock, Zap, TrendingUp, CheckCircle2, Star, Play
 } from "lucide-react";
 
-const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/Maskitech-hero-bg-PmR75BL2kd7qegqUDASAdk.webp";
+const HERO_BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80&auto=format&fit=crop";
 
 /* ─── Animated counter hook ─── */
 function useCountUp(target: number, duration = 2000, start = false) {
