@@ -308,7 +308,7 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-<footer className="border-t border-border mt-20">
+<footer className="border-t border-border mt-20 bg-[oklch(0.12_0.01_258)]">
   <div className="container py-16">
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 
