@@ -308,73 +308,104 @@ export default function Layout({ children }: LayoutProps) {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-border mt-20">
-        <div className="container py-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
-            {/* Brand */}
-            <div className="lg:col-span-2">
-              <div className="flex items-center gap-2.5 mb-4">
-                <div className="w-8 h-8 rounded-sm bg-[oklch(0.52_0.22_258)] flex items-center justify-center">
-                  <span className="text-white font-bold text-sm font-mono">NT</span>
-                </div>
-                <span className="font-semibold text-foreground text-base" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
-                  Maskitech <span className="text-[oklch(0.62_0.20_258)]">Systems</span>
-                </span>
-              </div>
-              <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
-                Enterprise technology solutions trusted by Fortune 500 companies worldwide. Building the infrastructure of tomorrow.
-              </p>
-              <div className="flex items-center gap-3 mt-6">
-                {["LinkedIn", "Twitter", "GitHub"].map((social) => (
-                  <button
-                    key={social}
-                    className="px-3 py-1.5 rounded-md bg-white/5 border border-white/8 text-muted-foreground hover:text-foreground hover:bg-white/8 text-xs transition-all"
-                  >
-                    {social}
-                  </button>
-                ))}
-              </div>
-            </div>
+<footer className="border-t border-border mt-20">
+  <div className="container py-16">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
 
-            {/* Links */}
-            {[
-              { title: "Platform", links: ["Apex Suite", "Shield Security", "DataFlow", "CloudBridge", "Pricing"] },
-              { title: "Company", links: ["About", "Careers", "Partners", "Contact", "Blog"] },
-              { title: "Resources", links: ["Documentation", "API Reference", "Case Studies", "Whitepapers", "Status"] },
-            ].map((col) => (
-              <div key={col.title}>
-                <h4 className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4 font-mono">
-                  {col.title}
-                </h4>
-                <ul className="space-y-2.5">
-                  {col.links.map((link) => (
-                    <li key={link}>
-                      <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                        {link}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-
-          <div className="section-divider mt-12 mb-6" />
-
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            <p className="text-xs text-muted-foreground">
-              © 2024 Maskitech Systems, Inc. All rights reserved.
-            </p>
-            <div className="flex items-center gap-6">
-              {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
-                <a key={item} href="#" className="text-xs text-muted-foreground hover:text-foreground transition-colors">
-                  {item}
-                </a>
-              ))}
-            </div>
+      {/* Brand */}
+      <div className="lg:col-span-2">
+        <div className="flex items-center gap-3 mb-4">
+          <img src="/logo_2.png" alt="Maskitech" className="h-12 w-auto" />
+          <div className="flex flex-col leading-none gap-1">
+            <span style={{ color:'#ffffff', fontSize:'20px', fontWeight:900, letterSpacing:'0.05em', lineHeight:1, fontFamily:'Space Grotesk, sans-serif' }}>
+              Maski<span style={{color:'#f97316'}}>tech</span>
+            </span>
+            <span style={{ color:'#60a5fa', fontSize:'10px', fontWeight:700, letterSpacing:'0.4em', textTransform:'uppercase' }}>
+              Solutions
+            </span>
           </div>
         </div>
-      </footer>
+        <p className="text-muted-foreground text-sm leading-relaxed max-w-xs mb-2">
+          Built in Kuwait by operators who needed better tools.
+          Now making those tools available to businesses across the Gulf.
+        </p>
+        <p className="text-muted-foreground text-xs leading-relaxed max-w-xs mb-6">
+          HR · Restaurant Analytics · Food Ordering
+        </p>
+        <div className="flex items-center gap-3">
+          <a href="mailto:admin@maskitech.com"
+            className="px-3 py-1.5 rounded-md bg-white/5 border border-white/8 text-muted-foreground hover:text-foreground hover:bg-white/8 text-xs transition-all">
+            Contact Us
+          </a>
+          <a href="/maskhr/contact"
+            className="px-3 py-1.5 rounded-md bg-[oklch(0.52_0.22_258)]/15 border border-[oklch(0.52_0.22_258)]/25 text-[oklch(0.62_0.20_258)] hover:bg-[oklch(0.52_0.22_258)]/25 text-xs transition-all">
+            Request Early Access
+          </a>
+        </div>
+      </div>
+
+      {/* Products */}
+      <div>
+        <h4 className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4 font-mono">Products</h4>
+        <ul className="space-y-2.5">
+          {[
+            { label: "MaskHR", href: "/maskhr" },
+            { label: "RestoData", href: "/products" },
+            { label: "FreshBite", href: "/products" },
+            { label: "Request Early Access", href: "/maskhr/contact" },
+          ].map((item) => (
+            <li key={item.label}>
+              <a href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Company */}
+      <div>
+        <h4 className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4 font-mono">Company</h4>
+        <ul className="space-y-2.5">
+          {[
+            { label: "About MaskHR", href: "/maskhr/about" },
+            { label: "Our Story", href: "/maskhr/about" },
+            { label: "Case Studies", href: "/case-studies" },
+            { label: "Insights", href: "/insights" },
+            { label: "Contact", href: "/maskhr/contact" },
+          ].map((item) => (
+            <li key={item.label}>
+              <a href={item.href} className="text-sm text-muted-foreground hover:text-foreground transition-colors">{item.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Legal + Location */}
+      <div>
+        <h4 className="text-xs font-semibold text-foreground uppercase tracking-widest mb-4 font-mono">Legal</h4>
+        <ul className="space-y-2.5">
+          {["Privacy Policy", "Terms of Service", "Cookie Policy"].map((item) => (
+            <li key={item}>
+              <a href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">{item}</a>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6 p-3 rounded-lg bg-[oklch(0.52_0.22_258)]/8 border border-[oklch(0.52_0.22_258)]/15">
+          <p className="text-xs text-muted-foreground">🇰🇼 Based in Kuwait City, Kuwait</p>
+          <p className="text-xs text-muted-foreground mt-1">admin@maskitech.com</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div className="section-divider mt-12 mb-6" />
+
+    <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p className="text-xs text-muted-foreground">© 2026 Maskitech Solutions. Built in Kuwait. All rights reserved.</p>
+      <p className="text-xs text-muted-foreground">Early access stage · Powered by Cloudflare Pages</p>
+    </div>
+
+  </div>
+</footer>
     </div>
   );
 }
