@@ -8,7 +8,7 @@ import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ArrowRight, Users, BarChart3, ShoppingCart,
-  Globe, Lock, Zap, TrendingUp, CheckCircle2, Star, Play
+  Globe, Lock, Zap, TrendingUp, CheckCircle2, Play
 } from "lucide-react";
 
 const HERO_BG = "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80&auto=format&fit=crop";
@@ -101,7 +101,7 @@ const products = [
     icon: Users,
     name: "MaskHR",
     tagline: "Human Resource Management",
-    description: "Complete HR platform for employee management, payroll, attendance, and performance reviews.",
+    description: "Complete HR platform for any business with a team. Manage employees, run payroll, track attendance, and review performance — all in one place.",
     features: ["Employee Management", "Payroll & Compensation", "Performance Reviews"],
     color: "oklch(0.52 0.22 258)",
     colorHex: "#4f8ef7",
@@ -185,7 +185,7 @@ export default function Home() {
             {/* LEFT — Headline + CTA */}
             <div>
               <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" className="mb-5">
-                <span className="Maskitech-badge">Integrated Business Solutions</span>
+                <span className="Maskitech-badge">Built in Kuwait · Proven in the Field</span>
               </motion.div>
 
               {/* Headline with typewriter */}
@@ -204,8 +204,10 @@ export default function Home() {
                 custom={2} variants={fadeUp} initial="hidden" animate="visible"
                 className="text-lg text-white/65 leading-relaxed max-w-xl mb-10"
               >
-                MaskiTech brings together HR management, restaurant analytics, and food ordering
-                into one unified platform. Trusted by 500+ organizations worldwide.
+                Software built from real operational experience — not from a whiteboard.
+                MaskHR works for any business with a team, from retail and hospitality to
+                healthcare and professional services. We proved it first in our own operations
+                at one of Kuwait's biggest restaurant chains.
               </motion.p>
 
               {/* CTAs */}
@@ -228,21 +230,19 @@ export default function Home() {
                 custom={4} variants={fadeUp} initial="hidden" animate="visible"
                 className="flex flex-wrap items-center gap-4"
               >
-                <div className="flex items-center gap-1.5">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} size={13} className="fill-[oklch(0.75_0.18_80)] text-[oklch(0.75_0.18_80)]" />
-                  ))}
-                  <span className="text-white/55 text-xs ml-1">4.9/5 on G2</span>
-                </div>
-                <div className="hidden sm:block h-4 w-px bg-white/20" />
                 <div className="flex items-center gap-1.5 text-white/55 text-xs">
                   <CheckCircle2 size={13} className="text-[oklch(0.62_0.20_258)]" />
-                  Enterprise Security
+                  HR for any industry
                 </div>
                 <div className="hidden sm:block h-4 w-px bg-white/20" />
                 <div className="flex items-center gap-1.5 text-white/55 text-xs">
                   <Globe size={13} className="text-[oklch(0.62_0.20_258)]" />
-                  Global Coverage
+                  Gulf market ready
+                </div>
+                <div className="hidden sm:block h-4 w-px bg-white/20" />
+                <div className="flex items-center gap-1.5 text-white/55 text-xs">
+                  <Lock size={13} className="text-[oklch(0.62_0.20_258)]" />
+                  Early access now open
                 </div>
               </motion.div>
             </div>
@@ -361,14 +361,51 @@ export default function Home() {
         </motion.div>
       </section>
 
-      {/* ══════════════════ METRICS ══════════════════ */}
       <section className="py-16 border-b border-border">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <MetricCard value={500} suffix="+" label="Organizations" description="Using MaskiTech products globally" />
-            <MetricCard value={50} suffix="+" label="Restaurant Chains" description="Powered by RestoData" />
-            <MetricCard value={10000} suffix="+" label="Active Users" description="On FreshBite platform" />
-            <MetricCard value={99} suffix=".99%" label="Uptime SLA" description="Enterprise-grade reliability" />
+            {[
+              {
+                icon: "🏪",
+                value: "3",
+                label: "Active Locations",
+                description: "Running MaskiTech software daily across our own Kuwait restaurant operations"
+              },
+              {
+                icon: "⚙️",
+                value: "3",
+                label: "Products in Development",
+                description: "MaskHR, RestoData, and FreshBite — each solving a real problem we faced ourselves"
+              },
+              {
+                icon: "🏢",
+                value: "Any Industry",
+                label: "MaskHR Is For Everyone",
+                description: "Retail, healthcare, hospitality, professional services — any business with employees can use MaskHR"
+              },
+              {
+                icon: "🇰🇼",
+                value: "Kuwait",
+                label: "Born & Built Here",
+                description: "Designed for the Gulf market, with Arabic support, KWD, and local compliance in mind"
+              },
+            ].map((item, i) => (
+              <motion.div
+                key={item.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.1 }}
+                className="glass-card glass-card-hover rounded-xl p-6 flex flex-col gap-2"
+              >
+                <div className="text-3xl mb-1">{item.icon}</div>
+                <div className="text-2xl font-bold text-[oklch(0.62_0.20_258)]" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  {item.value}
+                </div>
+                <p className="text-sm font-semibold text-foreground">{item.label}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{item.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -383,7 +420,8 @@ export default function Home() {
               <span className="text-gradient-cobalt">One Unified Platform</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Each product is built on modern cloud infrastructure and designed to work seamlessly together.
+              MaskHR serves any business with employees. RestoData and FreshBite are purpose-built
+              for the food & beverage industry. All three work together on one platform.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
@@ -403,8 +441,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-bold text-foreground mb-1">{product.name}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{product.tagline}</p>
-                  <p className="text-foreground/70 text-sm leading-relaxed">{product.description}</p>
-                </div>
+                  <p className="text-foreground/70 text-sm leading-relaxed">{product.description}</p>                </div>
                 <div className="flex-1">
                   <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-3">Key Features</p>
                   <div className="space-y-2">
@@ -443,17 +480,18 @@ export default function Home() {
               Why Choose <span className="text-gradient-cobalt">MaskiTech?</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Built for modern businesses that demand reliability, security, and seamless integration.
+              We didn't build this from a whiteboard. We built it from real operational pain —
+              and we made sure it works for any business with employees, not just one industry.
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
-              { icon: Zap, title: "Fast & Scalable", desc: "Built on Vercel and Supabase for lightning-fast performance at any scale." },
-              { icon: Lock, title: "Enterprise Security", desc: "Bank-grade encryption, role-based access, and comprehensive audit logs." },
-              { icon: Globe, title: "Global Infrastructure", desc: "Deployed worldwide with 99.99% uptime SLA and multi-region redundancy." },
-              { icon: TrendingUp, title: "Real-time Analytics", desc: "Make data-driven decisions with instant insights and predictive analytics." },
-              { icon: Users, title: "Unified Ecosystem", desc: "All products work together seamlessly with shared authentication and data." },
-              { icon: CheckCircle2, title: "24/7 Support", desc: "Dedicated support team ready to help you succeed every step of the way." },
+              { icon: Zap, title: "Any Industry, Any Size", desc: "Whether you run a clinic, a retail chain, a law firm, or a restaurant — if you have employees, MaskHR works for you." },
+              { icon: Lock, title: "Enterprise-Grade Security", desc: "Bank-level encryption, role-based access control, and full audit logs — built in from day one." },
+              { icon: Globe, title: "Gulf Market Ready", desc: "Arabic support, KWD currency, local compliance, and timezone-aware reporting built for the Gulf region." },
+              { icon: TrendingUp, title: "Real-Time Visibility", desc: "Know your headcount, payroll costs, and attendance across all departments right now — not tomorrow." },
+              { icon: Users, title: "One Login, Everything", desc: "HR, analytics, and ordering in one place. No switching between systems, no manual data re-entry." },
+              { icon: CheckCircle2, title: "Early Partner Benefits", desc: "Join now and directly shape the product roadmap. Early partners get priority support and founding-tier pricing." },
             ].map((item, i) => (
               <motion.div
                 key={item.title}
@@ -478,19 +516,21 @@ export default function Home() {
       <section className="py-20">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
-            <span className="Maskitech-badge mb-4 inline-block">Get Started</span>
+            <span className="Maskitech-badge mb-4 inline-block">Early Access</span>
             <h2 className="text-4xl font-bold text-foreground mb-4 leading-tight">
-              Ready to Transform Your Business?
+              Be Among the First to Use It
             </h2>
             <p className="text-muted-foreground mb-8 text-lg">
-              Start with a free trial of any MaskiTech product. No credit card required.
+              We're opening early access to businesses across Kuwait and the Gulf —
+              retail, healthcare, hospitality, professional services, and more.
+              No fluff — just working software and a team invested in your success.
             </p>
             <div className="flex flex-wrap gap-3 justify-center">
               <button className="flex items-center gap-2 px-6 py-3 bg-[oklch(0.52_0.22_258)] hover:bg-[oklch(0.58_0.22_258)] text-white font-medium rounded-lg transition-all cobalt-glow-sm">
-                Start Free Trial <ArrowRight size={16} />
+                Request Early Access <ArrowRight size={16} />
               </button>
               <button className="flex items-center gap-2 px-6 py-3 bg-white/5 border border-white/8 text-foreground font-medium rounded-lg hover:bg-white/8 transition-all">
-                Schedule Demo <ChevronRight size={16} />
+                Schedule a Demo <ChevronRight size={16} />
               </button>
             </div>
           </div>
