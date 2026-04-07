@@ -1,35 +1,69 @@
 /* ============================================================
-   MASKITECH — HOME PAGE
-   Design: Dark Modernism — hero with gradient orbs, metrics, product teaser
+   MASKITECH — HOME PAGE REDESIGN
+   Direction C: Product Showcase Hero
+   Dark background preserved, new layout approach
    ============================================================ */
-
 import { useState, useEffect, useRef } from "react";
 import { Link } from "wouter";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ChevronRight, ArrowRight, Users, BarChart3, ShoppingCart,
-  Globe, Lock, Zap, TrendingUp, CheckCircle2, Star
+  Globe, Lock, Zap, TrendingUp, CheckCircle2, Star, Play
 } from "lucide-react";
 
 const HERO_BG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663499682206/5S2oDo9MrGbF4qkHsfsTza/Maskitech-hero-bg-PmR75BL2kd7qegqUDASAdk.webp";
 
-function useCountUp(target: number, duration: number = 2000, start: boolean = false) {
+/* ─── Animated counter hook ─── */
+function useCountUp(target: number, duration = 2000, start = false) {
   const [count, setCount] = useState(0);
   useEffect(() => {
     if (!start) return;
     let startTime: number | null = null;
-    const step = (timestamp: number) => {
-      if (!startTime) startTime = timestamp;
-      const progress = Math.min((timestamp - startTime) / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-      setCount(Math.floor(eased * target));
-      if (progress < 1) requestAnimationFrame(step);
+    const step = (ts: number) => {
+      if (!startTime) startTime = ts;
+      const p = Math.min((ts - startTime) / duration, 1);
+      setCount(Math.floor((1 - Math.pow(1 - p, 3)) * target));
+      if (p < 1) requestAnimationFrame(step);
     };
     requestAnimationFrame(step);
   }, [target, duration, start]);
   return count;
 }
 
+/* ─── Typewriter hook ─── */
+function useTypewriter(words: string[], speed = 80, pause = 2200) {
+  const [display, setDisplay] = useState("");
+  const [wordIdx, setWordIdx] = useState(0);
+  const [charIdx, setCharIdx] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = words[wordIdx];
+    let timeout: ReturnType<typeof setTimeout>;
+
+    if (!deleting && charIdx <= word.length) {
+      timeout = setTimeout(() => {
+        setDisplay(word.slice(0, charIdx));
+        setCharIdx(c => c + 1);
+      }, speed);
+    } else if (!deleting && charIdx > word.length) {
+      timeout = setTimeout(() => setDeleting(true), pause);
+    } else if (deleting && charIdx >= 0) {
+      timeout = setTimeout(() => {
+        setDisplay(word.slice(0, charIdx));
+        setCharIdx(c => c - 1);
+      }, speed / 2);
+    } else {
+      setDeleting(false);
+      setWordIdx(i => (i + 1) % words.length);
+    }
+    return () => clearTimeout(timeout);
+  }, [charIdx, deleting, wordIdx, words, speed, pause]);
+
+  return display;
+}
+
+/* ─── Metric card ─── */
 function MetricCard({ value, suffix, label, description }: {
   value: number; suffix: string; label: string; description: string;
 }) {
@@ -38,12 +72,9 @@ function MetricCard({ value, suffix, label, description }: {
   const count = useCountUp(value, 1800, inView);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setInView(true); },
-      { threshold: 0.3 }
-    );
-    if (ref.current) observer.observe(ref.current);
-    return () => observer.disconnect();
+    const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setInView(true); }, { threshold: 0.3 });
+    if (ref.current) obs.observe(ref.current);
+    return () => obs.disconnect();
   }, []);
 
   return (
@@ -62,10 +93,7 @@ function MetricCard({ value, suffix, label, description }: {
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
-  visible: (i: number) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.1, duration: 0.5 }
-  })
+  visible: (i: number) => ({ opacity: 1, y: 0, transition: { delay: i * 0.1, duration: 0.5 } }),
 };
 
 const products = [
@@ -73,138 +101,251 @@ const products = [
     icon: Users,
     name: "MaskHR",
     tagline: "Human Resource Management",
-    description: "Complete HR platform for employee management, payroll, attendance, and performance reviews. Streamline your entire HR operations.",
+    description: "Complete HR platform for employee management, payroll, attendance, and performance reviews.",
     features: ["Employee Management", "Payroll & Compensation", "Performance Reviews"],
     color: "oklch(0.52 0.22 258)",
-    href: "/products",
+    colorHex: "#4f8ef7",
+    href: "/maskhr",
+    badge: "Enterprise",
   },
   {
     icon: BarChart3,
     name: "RestoData",
     tagline: "Restaurant Analytics",
-    description: "Advanced analytics dashboard for restaurant chains. Track sales, inventory, staff performance, and customer insights in real-time.",
+    description: "Advanced analytics for restaurant chains. Track sales, inventory, and customer insights in real-time.",
     features: ["Real-time Analytics", "Inventory Management", "Multi-location Support"],
     color: "oklch(0.55 0.18 200)",
+    colorHex: "#38bdf8",
     href: "/products",
+    badge: "Analytics",
   },
   {
     icon: ShoppingCart,
     name: "FreshBite",
     tagline: "Food Preorder App",
-    description: "Customer-facing food preorder and delivery application with real-time tracking, payments, and loyalty rewards.",
+    description: "Customer-facing food preorder and delivery app with real-time tracking, payments, and loyalty rewards.",
     features: ["Pre-order System", "Real-time Tracking", "Loyalty Rewards"],
     color: "oklch(0.55 0.18 160)",
+    colorHex: "#34d399",
     href: "/products",
+    badge: "Consumer",
   },
 ];
 
 export default function Home() {
-  useEffect(()=>{const fn=()=>{const el=document.getElementById('parallax-logo');if(el)el.style.transform=`translateY(${window.scrollY*0.8}px)`;};window.addEventListener('scroll',fn,{passive:true});return()=>window.removeEventListener('scroll',fn);},[]);
+  const [activeProduct, setActiveProduct] = useState(0);
+  const typed = useTypewriter(["MaskHR", "RestoData", "FreshBite"]);
+
+  /* Auto-rotate product cards */
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveProduct(p => (p + 1) % products.length);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, []);
+
+  /* Parallax logo on scroll */
+  useEffect(() => {
+    const fn = () => {
+      const el = document.getElementById("parallax-logo");
+      if (el) el.style.transform = `translateY(${window.scrollY * 0.8}px)`;
+    };
+    window.addEventListener("scroll", fn, { passive: true });
+    return () => window.removeEventListener("scroll", fn);
+  }, []);
+
   return (
     <div className="flex flex-col">
-      {/* ── HERO ── */}
-      <section className="relative min-h-screen flex items-center justify-center pt-20 pb-12">
-        {/* Background */}
+
+      {/* ══════════════════ HERO ══════════════════ */}
+      <section className="relative min-h-screen flex items-center pt-20 pb-12 overflow-hidden">
+
+        {/* Background image + overlays */}
         <div className="absolute inset-0 z-0">
           <img src={HERO_BG} alt="Hero background" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/60 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/65 to-background" />
           <div className="absolute inset-0 bg-gradient-to-br from-[oklch(0.52_0.22_258)]/8 to-[oklch(0.55_0.18_200)]/4" />
         </div>
-{/* Logo watermark with CSS parallax */}
-<div className="absolute inset-0 z-0 flex items-center justify-end overflow-hidden pointer-events-none">
-  <img
-    src="/logo_2.png"
-    alt=""
-    id="parallax-logo"
-    className="w-auto"
-    style={{
-      height: '85%',
-      opacity: 0.5,
-      marginRight: '-5%',
-      animation: 'logoDrift 0s linear',
-      willChange: 'transform',
-    }}
-  />
-</div>
-        {/* Content */}
+
+        {/* Robot logo watermark — parallax */}
+        <div className="absolute inset-0 z-0 flex items-center justify-end overflow-hidden pointer-events-none">
+          <img
+            src="/logo_2.png"
+            alt=""
+            id="parallax-logo"
+            className="w-auto"
+            style={{ height: "80%", opacity: 0.35, marginRight: "-5%", willChange: "transform" }}
+          />
+        </div>
+
+        {/* ─── Main content grid ─── */}
         <div className="container relative z-10">
-          <div className="max-w-3xl">
-            <motion.div
-              custom={0}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="mb-5"
-            >
-              <span className="Maskitech-badge">Integrated Business Solutions</span>
-            </motion.div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
 
-            <motion.h1
-              custom={1}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white leading-[1.05] tracking-tight mb-6"
-            >
-              The Platform for
-              <br />
-              <span className="text-gradient-cobalt">Modern Business</span>
-            </motion.h1>
+            {/* LEFT — Headline + CTA */}
+            <div>
+              <motion.div custom={0} variants={fadeUp} initial="hidden" animate="visible" className="mb-5">
+                <span className="Maskitech-badge">Integrated Business Solutions</span>
+              </motion.div>
 
-            <motion.p
-              custom={2}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="text-lg text-white/70 leading-relaxed max-w-xl mb-10"
-            >
-              MaskiTech brings together HR management, restaurant analytics, and food ordering into one unified platform. Trusted by 500+ organizations worldwide.
-            </motion.p>
-
-            <motion.div
-              custom={3}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-wrap items-center gap-4"
-            >
-              <Link
-                href="/products"
-                className="flex items-center gap-2 px-6 py-3 bg-[oklch(0.52_0.22_258)] hover:bg-[oklch(0.58_0.22_258)] text-white font-semibold rounded-lg transition-all cobalt-glow text-sm"
+              {/* Headline with typewriter */}
+              <motion.h1
+                custom={1} variants={fadeUp} initial="hidden" animate="visible"
+                className="text-5xl sm:text-6xl lg:text-[3.75rem] font-bold text-white leading-[1.07] tracking-tight mb-6"
               >
-                Explore Products <ArrowRight size={16} />
-              </Link>
-              <Link
-                href="/case-studies"
-                className="flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/15 border border-white/20 text-white font-medium rounded-lg transition-all text-sm"
-              >
-                View Case Studies <ChevronRight size={16} />
-              </Link>
-            </motion.div>
+                One Platform.<br />
+                <span className="text-gradient-cobalt">
+                  {typed}
+                  <span className="animate-pulse text-[oklch(0.62_0.20_258)]">|</span>
+                </span>
+              </motion.h1>
 
-            {/* Trust signals */}
+              <motion.p
+                custom={2} variants={fadeUp} initial="hidden" animate="visible"
+                className="text-lg text-white/65 leading-relaxed max-w-xl mb-10"
+              >
+                MaskiTech brings together HR management, restaurant analytics, and food ordering
+                into one unified platform. Trusted by 500+ organizations worldwide.
+              </motion.p>
+
+              {/* CTAs */}
+              <motion.div
+                custom={3} variants={fadeUp} initial="hidden" animate="visible"
+                className="flex flex-wrap items-center gap-4 mb-12"
+              >
+                <Link href="/products"
+                  className="flex items-center gap-2 px-6 py-3 bg-[oklch(0.52_0.22_258)] hover:bg-[oklch(0.58_0.22_258)] text-white font-semibold rounded-lg transition-all cobalt-glow text-sm"
+                >
+                  Explore Products <ArrowRight size={16} />
+                </Link>
+                <button className="flex items-center gap-2 px-6 py-3 bg-white/8 hover:bg-white/14 border border-white/20 text-white font-medium rounded-lg transition-all text-sm">
+                  <Play size={14} className="fill-white" /> Watch Demo
+                </button>
+              </motion.div>
+
+              {/* Trust signals */}
+              <motion.div
+                custom={4} variants={fadeUp} initial="hidden" animate="visible"
+                className="flex flex-wrap items-center gap-4"
+              >
+                <div className="flex items-center gap-1.5">
+                  {[...Array(5)].map((_, i) => (
+                    <Star key={i} size={13} className="fill-[oklch(0.75_0.18_80)] text-[oklch(0.75_0.18_80)]" />
+                  ))}
+                  <span className="text-white/55 text-xs ml-1">4.9/5 on G2</span>
+                </div>
+                <div className="hidden sm:block h-4 w-px bg-white/20" />
+                <div className="flex items-center gap-1.5 text-white/55 text-xs">
+                  <CheckCircle2 size={13} className="text-[oklch(0.62_0.20_258)]" />
+                  Enterprise Security
+                </div>
+                <div className="hidden sm:block h-4 w-px bg-white/20" />
+                <div className="flex items-center gap-1.5 text-white/55 text-xs">
+                  <Globe size={13} className="text-[oklch(0.62_0.20_258)]" />
+                  Global Coverage
+                </div>
+              </motion.div>
+            </div>
+
+            {/* RIGHT — Product showcase cards */}
             <motion.div
-              custom={4}
-              variants={fadeUp}
-              initial="hidden"
-              animate="visible"
-              className="flex flex-wrap items-center gap-4 mt-12"
+              initial={{ opacity: 0, x: 40 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="relative hidden lg:block"
             >
-              <div className="flex items-center gap-1.5">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={14} className="fill-[oklch(0.75_0.18_80)] text-[oklch(0.75_0.18_80)]" />
+              {/* Product selector tabs */}
+              <div className="flex gap-2 mb-6">
+                {products.map((p, i) => (
+                  <button
+                    key={p.name}
+                    onClick={() => setActiveProduct(i)}
+                    className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all"
+                    style={activeProduct === i
+                      ? { background: `${p.colorHex}22`, border: `1px solid ${p.colorHex}55`, color: p.colorHex }
+                      : { background: "rgba(255,255,255,0.05)", border: "1px solid rgba(255,255,255,0.1)", color: "rgba(255,255,255,0.5)" }
+                    }
+                  >
+                    <p.icon size={14} />
+                    {p.name}
+                  </button>
                 ))}
-                <span className="text-white/60 text-xs ml-1">4.9/5 on G2</span>
               </div>
-              <div className="hidden sm:block h-4 w-px bg-white/20" />
-              <div className="flex items-center gap-1.5 text-white/60 text-xs">
-                <CheckCircle2 size={13} className="text-[oklch(0.62_0.20_258)]" />
-                Enterprise Grade Security
-              </div>
-              <div className="hidden sm:block h-4 w-px bg-white/20" />
-              <div className="flex items-center gap-1.5 text-white/60 text-xs">
-                <Globe size={13} className="text-[oklch(0.62_0.20_258)]" />
-                Global Coverage
+
+              {/* Active product card */}
+              <AnimatePresence mode="wait">
+                {products.map((product, i) => i === activeProduct && (
+                  <motion.div
+                    key={product.name}
+                    initial={{ opacity: 0, y: 20, scale: 0.97 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -16, scale: 0.97 }}
+                    transition={{ duration: 0.35 }}
+                    className="glass-card rounded-2xl p-8"
+                    style={{ border: `1px solid ${product.colorHex}30` }}
+                  >
+                    {/* Header */}
+                    <div className="flex items-start justify-between mb-6">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className="w-14 h-14 rounded-xl flex items-center justify-center"
+                          style={{ background: `${product.colorHex}18`, border: `1px solid ${product.colorHex}30` }}
+                        >
+                          <product.icon size={28} style={{ color: product.colorHex }} />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl font-bold text-white">{product.name}</h3>
+                          <p className="text-sm" style={{ color: product.colorHex }}>{product.tagline}</p>
+                        </div>
+                      </div>
+                      <span
+                        className="text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+                        style={{ background: `${product.colorHex}18`, color: product.colorHex, border: `1px solid ${product.colorHex}40` }}
+                      >
+                        {product.badge}
+                      </span>
+                    </div>
+
+                    {/* Description */}
+                    <p className="text-white/60 text-sm leading-relaxed mb-6">{product.description}</p>
+
+                    {/* Features */}
+                    <div className="space-y-3 mb-8">
+                      {product.features.map((feat) => (
+                        <div key={feat} className="flex items-center gap-3">
+                          <div className="w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0"
+                            style={{ background: `${product.colorHex}18`, border: `1px solid ${product.colorHex}40` }}>
+                            <CheckCircle2 size={12} style={{ color: product.colorHex }} />
+                          </div>
+                          <span className="text-white/75 text-sm">{feat}</span>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* CTA */}
+                    <Link href={product.href}
+                      className="flex items-center justify-center gap-2 w-full py-3 rounded-xl font-semibold text-sm text-white transition-all"
+                      style={{ background: `${product.colorHex}CC`, boxShadow: `0 0 24px ${product.colorHex}30` }}
+                    >
+                      Explore {product.name} <ArrowRight size={16} />
+                    </Link>
+                  </motion.div>
+                ))}
+              </AnimatePresence>
+
+              {/* Progress dots */}
+              <div className="flex gap-2 mt-5 justify-center">
+                {products.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setActiveProduct(i)}
+                    className="h-1.5 rounded-full transition-all"
+                    style={{
+                      width: activeProduct === i ? "24px" : "6px",
+                      background: activeProduct === i ? products[i].colorHex : "rgba(255,255,255,0.2)"
+                    }}
+                  />
+                ))}
               </div>
             </motion.div>
           </div>
@@ -214,13 +355,13 @@ export default function Home() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/40 text-xs font-mono"
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/35 text-xs font-mono tracking-widest"
         >
           SCROLL
         </motion.div>
       </section>
 
-      {/* ── METRICS ── */}
+      {/* ══════════════════ METRICS ══════════════════ */}
       <section className="py-16 border-b border-border">
         <div className="container">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
@@ -232,21 +373,19 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── PRODUCTS TEASER ── */}
+      {/* ══════════════════ PRODUCTS (mobile + detail) ══════════════════ */}
       <section className="py-20">
         <div className="container">
           <div className="text-center mb-16">
             <span className="Maskitech-badge mb-4 inline-block">Our Product Suite</span>
             <h2 className="text-4xl font-bold text-foreground mb-3 leading-tight">
-              Three Powerful Products,
-              <br />
+              Three Powerful Products,<br />
               <span className="text-gradient-cobalt">One Unified Platform</span>
             </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
               Each product is built on modern cloud infrastructure and designed to work seamlessly together.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
             {products.map((product, i) => (
               <motion.div
@@ -258,46 +397,36 @@ export default function Home() {
                 className="glass-card glass-card-hover rounded-2xl p-8 flex flex-col gap-6 group"
               >
                 <div>
-                  <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                    style={{ background: `${product.color}20`, border: `1px solid ${product.color}30` }}
-                  >
-                    <product.icon size={24} style={{ color: product.color }} />
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
+                    style={{ background: `${product.colorHex}18`, border: `1px solid ${product.colorHex}30` }}>
+                    <product.icon size={24} style={{ color: product.colorHex }} />
                   </div>
                   <h3 className="text-xl font-bold text-foreground mb-1">{product.name}</h3>
                   <p className="text-sm text-muted-foreground mb-3">{product.tagline}</p>
                   <p className="text-foreground/70 text-sm leading-relaxed">{product.description}</p>
                 </div>
-
                 <div className="flex-1">
                   <p className="text-xs font-mono text-muted-foreground uppercase tracking-widest mb-3">Key Features</p>
                   <div className="space-y-2">
                     {product.features.map((feature) => (
                       <div key={feature} className="flex items-center gap-2 text-sm text-foreground/70">
-                        <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.color }} />
+                        <div className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ background: product.colorHex }} />
                         {feature}
                       </div>
                     ))}
                   </div>
                 </div>
-
-                <Link
-                  href={product.href}
+                <Link href={product.href}
                   className="flex items-center gap-2 px-4 py-2.5 rounded-lg font-medium text-sm transition-all text-white w-full justify-center"
-                  style={{
-                    background: product.color,
-                    boxShadow: `0 0 16px ${product.color}40`
-                  }}
+                  style={{ background: product.colorHex, boxShadow: `0 0 16px ${product.colorHex}40` }}
                 >
                   Learn More <ArrowRight size={14} />
                 </Link>
               </motion.div>
             ))}
           </div>
-
           <div className="text-center">
-            <Link
-              href="/products"
+            <Link href="/products"
               className="inline-flex items-center gap-2 px-6 py-3 bg-[oklch(0.52_0.22_258)] hover:bg-[oklch(0.58_0.22_258)] text-white font-medium rounded-lg transition-all cobalt-glow-sm"
             >
               View All Products <ArrowRight size={16} />
@@ -306,7 +435,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── WHY MASKITECH ── */}
+      {/* ══════════════════ WHY MASKITECH ══════════════════ */}
       <section className="py-20 bg-[oklch(0.14_0.01_258)] border-y border-border">
         <div className="container">
           <div className="text-center mb-16">
@@ -317,7 +446,6 @@ export default function Home() {
               Built for modern businesses that demand reliability, security, and seamless integration.
             </p>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[
               { icon: Zap, title: "Fast & Scalable", desc: "Built on Vercel and Supabase for lightning-fast performance at any scale." },
@@ -346,7 +474,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── CTA ── */}
+      {/* ══════════════════ CTA ══════════════════ */}
       <section className="py-20">
         <div className="container">
           <div className="max-w-2xl mx-auto text-center">
@@ -368,6 +496,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
     </div>
   );
 }
